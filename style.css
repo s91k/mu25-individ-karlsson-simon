@@ -87,15 +87,11 @@ body {
 .bookmark {
     list-style: none;
     padding: 0.5rem;
-}
-
-.bookmark {
-    list-style: none;
     display: grid;
     grid-template-areas: 
-    "title update-button"
-    "url update-button";
-    grid-template-columns: 1fr auto;
+    "title update-button delete-button"
+    "url update-button delete-button";
+    grid-template-columns: 1fr auto auto;
 }
 
 .bookmark:nth-child(odd){
@@ -135,6 +131,22 @@ body {
 }
 
 .bookmark__update-button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.bookmark__delete-button {
+    grid-area: delete-button;
+    border: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    height: fit-content;
+    align-self: center;
+    opacity: 0.6;
+    background-color: transparent;
+}
+
+.bookmark__delete-button:hover {
     opacity: 1;
     cursor: pointer;
 }
