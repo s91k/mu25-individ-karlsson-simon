@@ -28,11 +28,11 @@ body {
     right: 2rem;
 }
 
-.button--red {
+.button--dialog-cancel {
     background-color: #e01a1a;
 }
 
-.button--red:hover {
+.button--dialog-cancel:hover {
     background-color: #b41616
 }
 
@@ -56,6 +56,30 @@ body {
     gap: 1rem;
 }
 
+.bookmark-dialog__update-header {
+    display: none;
+}
+
+.button--dialog-update {
+    display: none;
+}
+
+.bookmark-dialog--update .bookmark-dialog__update-header {
+    display: unset;
+}
+
+.bookmark-dialog--update .button--dialog-update {
+    display: unset;
+}
+
+.bookmark-dialog--update .bookmark-dialog__new-header {
+    display: none;
+}
+
+.bookmark-dialog--update .button--dialog-new {
+    display: none;
+}
+
 .bookmarks {
     padding: 0;
 }
@@ -67,6 +91,11 @@ body {
 
 .bookmark {
     list-style: none;
+    display: grid;
+    grid-template-areas: 
+    "title update-button"
+    "url update-button";
+    grid-template-columns: 1fr auto;
 }
 
 .bookmark:nth-child(odd){
@@ -81,6 +110,7 @@ body {
     color: #000000;
     font-size: 1.2em;
     text-decoration: none;
+    grid-area: title;
 }
 
 .bookmark__title:hover {
@@ -91,6 +121,22 @@ body {
     color: #888888;
     font-size: 0.8rem;
     margin-bottom: 0;
+    grid-area: url;
+}
+
+.bookmark__update-button {
+    grid-area: update-button;
+    border: 0;
+    height: fit-content;
+    background-color: transparent;
+    align-self: center;
+    opacity: 0.6;
+    font-size: 1.2em;
+}
+
+.bookmark__update-button:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 .no-bookmarks-error {

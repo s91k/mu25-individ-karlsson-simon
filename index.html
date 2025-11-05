@@ -15,11 +15,14 @@
     <main class="main">
         <ul class="bookmarks"></ul>
         <p class="no-bookmarks-error">Inga bokmärken har skapats än</p>
-        <button class="button button--new-bookmark" onclick="showNewBookmark()">Nytt bokmärke</button>
+        <button class="button button--new-bookmark" onclick="showNewBookmarkDialog()">Nytt bokmärke</button>
     </main>
 
     <dialog class="bookmark-dialog">
-            <h2 class="bookmark-dialog__header">Nytt bokmärke</h2>
+            <h2>
+                <span class="bookmark-dialog__new-header">Nytt bokmärke</span>
+                <span class="bookmark-dialog__update-header">Updatera bokmärke</span>
+            </h2>
 
             <section class="bookmark-dialog__input-section">
                 <label for="title">Titel:</label>
@@ -29,8 +32,10 @@
             </section>
 
             <section class="bookmark-dialog__button-section">
-                <button class="button" onclick="addBookmark()">Lägg till</button>
-                <button class="button button--red" onclick="hideNewBookmark()">Avbryt</button>
+                <button class="button button--dialog-new" onclick="addBookmark()">Lägg till</button>
+                <button class="button button--dialog-update" onclick="updateBookmark()">Uppdatera</button>
+
+                <button class="button button--dialog-cancel" onclick="hideBookmarkDialog()">Avbryt</button>
             </section>
     </dialog>
 </body>
