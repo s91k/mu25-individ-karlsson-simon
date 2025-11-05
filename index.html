@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmarks Mini</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="/app.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <h1>Bookmarks Mini</h1>
+    </header>
+
+    <main class="main">
+        <ul class="bookmarks"></ul>
+        <p class="no-bookmarks-error">Inga bokmärken har skapats än</p>
+        <button class="button button--new-bookmark" onclick="showNewBookmark()">Nytt bokmärke</button>
+    </main>
+
+    <dialog class="bookmark-dialog">
+            <h2 class="bookmark-dialog__header">Nytt bokmärke</h2>
+
+            <section class="bookmark-dialog__input-section">
+                <label for="title">Titel:</label>
+                <input id="title" type="text">
+                <label for="url">URL:</label>
+                <input id="url" type="url">
+            </section>
+
+            <section class="bookmark-dialog__button-section">
+                <button class="button" onclick="addBookmark()">Lägg till</button>
+                <button class="button button--red" onclick="hideNewBookmark()">Avbryt</button>
+            </section>
+    </dialog>
+</body>
+</html>
