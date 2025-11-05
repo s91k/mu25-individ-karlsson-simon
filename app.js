@@ -1,5 +1,3 @@
-const bookmarks = [];
-
 const showNewBookmark = () => document.querySelector(".bookmark-dialog").showModal();
 
 const hideNewBookmark = () => document.querySelector(".bookmark-dialog").close();
@@ -19,6 +17,7 @@ function addBookmark(){
         title.value = "";
         url.value = "";
 
+        saveBookmarks();
         renderBookmarks();
         hideNewBookmark();
     }
@@ -51,3 +50,10 @@ function renderBookmarks(){
     const error = document.querySelector(".no-bookmarks-error");
     error.hidden = bookmarks.length > 0;
 }
+
+function saveBookmarks(){
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+}
+
+const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) ?? [];
+renderBookmarks();
