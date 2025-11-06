@@ -83,20 +83,39 @@ function renderBookmarks(){
         p.classList.add("bookmark__url");
         p.textContent = b.url;
 
+        const upButton = document.createElement("button");
+        upButton.classList.add("bookmark__button", "bookmark__button--up");
+        upButton.textContent = "▲";
+        upButton.addEventListener("click", () => {
+            if(i > 0){
+                bookmarks[i] = bookmarks.splice(i - 1, 1, bookmarks[i])[0];
+                saveBookmarks();
+                renderBookmarks();
+            }
+        });
+
+        const downButton = document.createElement("button");
+        downButton.classList.add("bookmark__button", "bookmark__button--down");
+        downButton.textContent = "▼";
+        downButton.addEventListener("click", (e) => {
+            if(i < bookmarks.length - 1){
+                bookmarks[i] = bookmarks.splice(i + 1, 1, bookmarks[i])[0];
+                saveBookmarks();
+                renderBookmarks();
+            }
+        });
+
         const updateButton = document.createElement("button");
-        updateButton.classList.add("bookmark__update-button");
+        updateButton.classList.add("bookmark__button", "bookmark__button--update");
         updateButton.textContent = "✎";
         updateButton.addEventListener("click", () => showUpdateBookmarkDialog(i));
 
         const deleteButton = document.createElement("button");
-        deleteButton.classList.add("bookmark__delete-button");
+        deleteButton.classList.add("bookmark__button", "bookmark__button--delete");
         deleteButton.textContent = "✕";
         deleteButton.addEventListener("click", () => deleteBookmark(i));
 
-        li.appendChild(a);
-        li.appendChild(p);
-        li.appendChild(updateButton);
-        li.appendChild(deleteButton);
+        li.append(a, p, upButton, downButton, updateButton, deleteButton);
 
         list.appendChild(li);
     });
