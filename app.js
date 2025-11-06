@@ -1,25 +1,58 @@
-const showNewBookmark = () => document.querySelector(".bookmark-dialog").showModal();
+function showNewBookmarkDialog(){
+    const dialog = document.querySelector(".bookmark-dialog");
+    dialog.classList.remove("bookmark-dialog--update");
 
-const hideNewBookmark = () => document.querySelector(".bookmark-dialog").close();
+    document.querySelector("#title").value = "";
+    document.querySelector("#url").value = "";
+
+    document.querySelector(".bookmark-dialog").showModal();
+}
+
+function showUpdateBookmarkDialog(bookmarkToUpdate){
+    const dialog = document.querySelector(".bookmark-dialog");
+    dialog.classList.add("bookmark-dialog--update");
+
+    document.querySelector("#title").value = bookmarks[bookmarkToUpdate].title;
+    document.querySelector("#url").value = bookmarks[bookmarkToUpdate].url;
+
+    document.querySelector(".button--dialog-update").onclick = () => updateBookmark(bookmarkToUpdate);
+
+    document.querySelector(".bookmark-dialog").showModal();
+}
+
+const hideBookmarkDialog = () => document.querySelector(".bookmark-dialog").close();
 
 function addBookmark(){
-    const title = document.querySelector("#title");
-    const url = document.querySelector("#url");
+    const title = document.querySelector("#title").value;
+    const url = document.querySelector("#url").value;
 
-    if(title.value.length == 0 || url.value.length == 0){
+    if(title.length == 0 || url.length == 0){
         window.alert("Titel och URL måste innehålla något värde");
     } else {
         bookmarks.push({
-            title: title.value,
-            url: url.value
+            title: title,
+            url: url
         });
-
-        title.value = "";
-        url.value = "";
 
         saveBookmarks();
         renderBookmarks();
-        hideNewBookmark();
+        hideBookmarkDialog();
+    }
+}
+
+function updateBookmark(bookmarkToUpdate){
+    const title = document.querySelector("#title").value;
+    const url = document.querySelector("#url").value;
+
+    if(title.length == 0 || url.length == 0){
+        window.alert("Titel och URL måste innehålla något värde");
+    } else {
+        bookmarks[bookmarkToUpdate].title = title;
+        bookmarks[bookmarkToUpdate].url = url;
+
+        saveBookmarks();
+        renderBookmarks();
+        hideBookmarkDialog();
     }
 }
 
@@ -27,7 +60,7 @@ function renderBookmarks(){
     const list = document.querySelector(".bookmarks");
     list.innerHTML = "";
 
-    bookmarks.forEach(b => {
+    bookmarks.forEach((b, i) => {
         const li = document.createElement("li");
         li.classList.add("bookmark");
 
@@ -41,8 +74,14 @@ function renderBookmarks(){
         p.classList.add("bookmark__url");
         p.textContent = b.url;
 
+        const updateButton = document.createElement("button");
+        updateButton.classList.add("bookmark__update-button");
+        updateButton.textContent = "✎";
+        updateButton.addEventListener("click", () => showUpdateBookmarkDialog(i));
+
         li.appendChild(a);
         li.appendChild(p);
+        li.appendChild(updateButton);
 
         list.appendChild(li);
     });
