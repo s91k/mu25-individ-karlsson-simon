@@ -56,6 +56,15 @@ function updateBookmark(bookmarkToUpdate){
     }
 }
 
+function deleteBookmark(i){
+    if(window.confirm("Vill du ta bort det här bokmärket?")){
+        bookmarks.splice(i, 1);
+
+        saveBookmarks();
+        renderBookmarks();
+    }
+}
+
 function renderBookmarks(){
     const list = document.querySelector(".bookmarks");
     list.innerHTML = "";
@@ -79,9 +88,15 @@ function renderBookmarks(){
         updateButton.textContent = "✎";
         updateButton.addEventListener("click", () => showUpdateBookmarkDialog(i));
 
+        const deleteButton = document.createElement("button");
+        deleteButton.classList.add("bookmark__delete-button");
+        deleteButton.textContent = "✕";
+        deleteButton.addEventListener("click", () => deleteBookmark(i));
+
         li.appendChild(a);
         li.appendChild(p);
         li.appendChild(updateButton);
+        li.appendChild(deleteButton);
 
         list.appendChild(li);
     });
