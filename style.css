@@ -124,6 +124,7 @@ body {
     font-size: 1.2em;
     text-decoration: none;
     grid-area: title;
+    word-break: break-all;
 }
 
 .bookmark__title:hover {
