@@ -25,12 +25,12 @@
             </h2>
 
             <section class="bookmark-dialog__input-section">
-                <label for="title">Titel:</label>
-                <input id="title" type="text">
+                <label class="bookmark-dialog__label" for="title">Titel:</label>
+                <input class="bookmark-dialog__input" id="title" type="text" oninput="removeErrorHighlight(this)">
                 <p class="bookmark-dialog__error" id="title-error"></p>
                 
-                <label for="url">URL:</label>
-                <input id="url" type="url">
+                <label class="bookmark-dialog__label" for="url">URL:</label>
+                <input class="bookmark-dialog__input" id="url" type="url" oninput="removeErrorHighlight(this)">
                 <p class="bookmark-dialog__error" id="url-error"></p>
             </section>
 

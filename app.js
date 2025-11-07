@@ -22,6 +22,8 @@ function showUpdateBookmarkDialog(bookmarkToUpdate){
 
 const hideBookmarkDialog = () => document.querySelector(".bookmark-dialog").close();
 
+const removeErrorHighlight = (e) => e.classList.remove("bookmark-dialog__input--invalid");
+
 function isValidUrl(url){
     try {
         const u = new URL(url);
@@ -53,11 +55,19 @@ function validateDialogInput(newBookmark) {
     } else if(newBookmark && bookmarks.some(b => b.url == urlInputElement.value)) {
         urlError = "Ett bokmärke med denna URL finns redan.";
     } else if(!isValidUrl(urlInputElement.value)) {
-        urlError = "Inte giltigt URL (ex: http://www.exempel.com)";
+        urlError = "Inte giltigt URL (ex: https://www.exempel.com)";
     }
 
     titleErrorElement.textContent = titleError;
     urlErrorElement.textContent = urlError;
+
+    if(titleError.length > 0){
+        titleInputElement.classList.add("bookmark-dialog__input--invalid");
+    }
+
+    if(urlError.length > 0){
+        urlInputElement.classList.add("bookmark-dialog__input--invalid");
+    }
 
     return titleError.length == 0 && urlError.length == 0;
 }
