@@ -5,6 +5,8 @@ function showNewBookmarkDialog(){
     document.querySelector("#title").value = "";
     document.querySelector("#url").value = "";
 
+    removeAllErrorHightlighting();
+
     document.querySelector(".bookmark-dialog").showModal();
 }
 
@@ -17,7 +19,17 @@ function showUpdateBookmarkDialog(bookmarkToUpdate){
 
     document.querySelector(".button--dialog-update").onclick = () => updateBookmark(bookmarkToUpdate);
 
+    removeAllErrorHightlighting();
+
     document.querySelector(".bookmark-dialog").showModal();
+}
+
+function removeAllErrorHightlighting(){
+    removeErrorHighlight(document.querySelector("#title"));
+    removeErrorHighlight(document.querySelector("#url"));
+
+    document.querySelector("#title-error").textContent = "";
+    document.querySelector("#url-error").textContent = "";
 }
 
 const hideBookmarkDialog = () => document.querySelector(".bookmark-dialog").close();
@@ -37,9 +49,6 @@ function validateDialogInput(newBookmark) {
     const titleInputElement = document.querySelector("#title");
     const urlInputElement = document.querySelector("#url");
 
-    const titleErrorElement = document.querySelector("#title-error");
-    const urlErrorElement = document.querySelector("#url-error");
-
     let titleError = "";
     let urlError = "";
 
@@ -52,14 +61,14 @@ function validateDialogInput(newBookmark) {
 
     if(urlInputElement.value.length == 0){
         urlError = "Måste innehålla något värde.";
-    } else if(newBookmark && bookmarks.some(b => b.url == urlInputElement.value)) {
+    } else if(newBookmark ? bookmarks.some(b => b.url == urlInputElement.value) : bookmarks.filter(b => b.url == urlInputElement.value).length == 1) {
         urlError = "Ett bokmärke med denna URL finns redan.";
     } else if(!isValidUrl(urlInputElement.value)) {
         urlError = "Inte giltigt URL (ex: https://www.exempel.com)";
     }
 
-    titleErrorElement.textContent = titleError;
-    urlErrorElement.textContent = urlError;
+    document.querySelector("#title-error").textContent = titleError;
+    document.querySelector("#url-error").textContent = urlError;
 
     if(titleError.length > 0){
         titleInputElement.classList.add("bookmark-dialog__input--invalid");
