@@ -45,7 +45,7 @@ function isValidUrl(url){
     }
 }
 
-function validateDialogInput(newBookmark) {
+function validateDialogInput(bookmarkToUpdate = -1) {
     const titleInputElement = document.querySelector("#title");
     const urlInputElement = document.querySelector("#url");
 
@@ -61,7 +61,7 @@ function validateDialogInput(newBookmark) {
 
     if(urlInputElement.value.length == 0){
         urlError = "Måste innehålla något värde.";
-    } else if(newBookmark ? bookmarks.some(b => b.url == urlInputElement.value) : bookmarks.filter(b => b.url == urlInputElement.value).length == 1) {
+    } else if(bookmarks.some((b, i) => i != bookmarkToUpdate && b.url == urlInputElement.value)) {
         urlError = "Ett bokmärke med denna URL finns redan.";
     } else if(!isValidUrl(urlInputElement.value)) {
         urlError = "Inte giltigt URL (ex: https://www.exempel.com)";
@@ -82,7 +82,7 @@ function validateDialogInput(newBookmark) {
 }
 
 function addBookmark(){
-    if(validateDialogInput(true)) {
+    if(validateDialogInput()) {
         bookmarks.push({
             title: document.querySelector("#title").value,
             url: document.querySelector("#url").value
@@ -95,7 +95,7 @@ function addBookmark(){
 }
 
 function updateBookmark(bookmarkToUpdate){
-    if(validateDialogInput(false)) {
+    if(validateDialogInput(bookmarkToUpdate)) {
         bookmarks[bookmarkToUpdate].title = document.querySelector("#title").value;
         bookmarks[bookmarkToUpdate].url = document.querySelector("#url").value;
 
