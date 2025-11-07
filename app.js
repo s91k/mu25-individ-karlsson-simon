@@ -22,16 +22,51 @@ function showUpdateBookmarkDialog(bookmarkToUpdate){
 
 const hideBookmarkDialog = () => document.querySelector(".bookmark-dialog").close();
 
-function addBookmark(){
-    const title = document.querySelector("#title").value;
-    const url = document.querySelector("#url").value;
+function isValidUrl(url){
+    try {
+        const u = new URL(url);
+        return u.protocol === "http:" || u.protocol === "https:";
+    } catch(error) {
+        return false;
+    }
+}
 
-    if(title.length == 0 || url.length == 0){
-        window.alert("Titel och URL måste innehålla något värde");
-    } else {
+function validateDialogInput(newBookmark) {
+    const titleInputElement = document.querySelector("#title");
+    const urlInputElement = document.querySelector("#url");
+
+    const titleErrorElement = document.querySelector("#title-error");
+    const urlErrorElement = document.querySelector("#url-error");
+
+    let titleError = "";
+    let urlError = "";
+
+    titleInputElement.value = titleInputElement.value.trim();
+    urlInputElement.value = urlInputElement.value.trim();
+
+    if(titleInputElement.value.length == 0){
+        titleError = "Måste innehålla något värde.";
+    }
+
+    if(urlInputElement.value.length == 0){
+        urlError = "Måste innehålla något värde.";
+    } else if(newBookmark && bookmarks.some(b => b.url == urlInputElement.value)) {
+        urlError = "Ett bokmärke med denna URL finns redan.";
+    } else if(!isValidUrl(urlInputElement.value)) {
+        urlError = "Inte giltigt URL (ex: http://www.exempel.com)";
+    }
+
+    titleErrorElement.textContent = titleError;
+    urlErrorElement.textContent = urlError;
+
+    return titleError.length == 0 && urlError.length == 0;
+}
+
+function addBookmark(){
+    if(validateDialogInput(true)) {
         bookmarks.push({
-            title: title,
-            url: url
+            title: document.querySelector("#title").value,
+            url: document.querySelector("#url").value
         });
 
         saveBookmarks();
@@ -41,14 +76,9 @@ function addBookmark(){
 }
 
 function updateBookmark(bookmarkToUpdate){
-    const title = document.querySelector("#title").value;
-    const url = document.querySelector("#url").value;
-
-    if(title.length == 0 || url.length == 0){
-        window.alert("Titel och URL måste innehålla något värde");
-    } else {
-        bookmarks[bookmarkToUpdate].title = title;
-        bookmarks[bookmarkToUpdate].url = url;
+    if(validateDialogInput(false)) {
+        bookmarks[bookmarkToUpdate].title = document.querySelector("#title").value;
+        bookmarks[bookmarkToUpdate].url = document.querySelector("#url").value;
 
         saveBookmarks();
         renderBookmarks();
