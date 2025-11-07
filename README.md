@@ -42,4 +42,6 @@ En enkel webbapplikation för hantering av bokmärken som byggt för den invidue
 - **Mina reviews:**  
   - Given 1: <https://github.com/amerdervisicc/ExaminationGIT/pull/1>
   - Given 2: <https://github.com/xeffie/MU25-Individuell-Examination/pull/9>
-  - Mottagen: <https://github.com/s91k/mu25-individ-karlsson-simon/pull/4>
+  - Given 3: <https://github.com/VitaliyBeletskiy/mu25-git-agile-bookmarks-mini/pull/6>
+  - Mottagen 1: <https://github.com/s91k/mu25-individ-karlsson-simon/pull/3>
+  - Mottagen 2: <https://github.com/s91k/mu25-individ-karlsson-simon/pull/4>
