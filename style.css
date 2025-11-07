@@ -89,8 +89,8 @@ body {
     padding: 0.5rem;
     display: grid;
     grid-template-areas: 
-    "title update-button delete-button"
-    "url update-button delete-button";
+    "title up-button update-button delete-button"
+    "url down-button update-button delete-button";
     grid-template-columns: 1fr auto auto;
 }
 
@@ -120,23 +120,7 @@ body {
     grid-area: url;
 }
 
-.bookmark__update-button {
-    grid-area: update-button;
-    border: 0;
-    height: fit-content;
-    background-color: transparent;
-    align-self: center;
-    opacity: 0.6;
-    font-size: 1.2em;
-}
-
-.bookmark__update-button:hover {
-    opacity: 1;
-    cursor: pointer;
-}
-
-.bookmark__delete-button {
-    grid-area: delete-button;
+.bookmark__button {
     border: 0;
     font-size: 1.2em;
     font-weight: bold;
@@ -146,9 +130,35 @@ body {
     background-color: transparent;
 }
 
-.bookmark__delete-button:hover {
+.bookmark__button:hover {
     opacity: 1;
     cursor: pointer;
+}
+
+.bookmark__button--up {
+    grid-area: up-button;
+}
+
+.bookmark__button--down {
+    grid-area: down-button;
+}
+
+.bookmark__button--update {
+    grid-area: update-button;
+}
+
+.bookmark__button--delete {
+    grid-area: delete-button;
+}
+
+.bookmark:first-child .bookmark__button--up {
+    opacity: 0.3;
+    cursor: unset;
+}
+
+.bookmark:last-child .bookmark__button--down {
+    opacity: 0.3;
+    cursor: unset;
 }
 
 .no-bookmarks-error {
