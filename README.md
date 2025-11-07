@@ -1,4 +1,4 @@
-# Individuell examination – Git & Agilt (solo) 
+# Individuell examination – Git & Agilt (solo)
 
 ## Bookmarks Mini
 

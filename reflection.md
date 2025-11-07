@@ -40,9 +40,20 @@ Utveckla en enkel webbapplikation för hantering av bokmärken, användaren ska 
 - **Continue:** Länka branches och pull requests i Trello med Power-Ups.
 
 Minst **en** konkret förbättring du provar nästa sprint och *varför*.
+
+### Förbättring 1
+
+Använda CSS variabler så att det blir lättare hålla till ordning exempelvis färger, som det är nu hade jag varit tvungen att uppdatera på flera ställen om vill ändra färgen indikerar att något är fel.
+
+### Förbättring 2
+
+Tänka igenom mer om hur lång tid och hur mycket kod som krävs för varje User Story. Exempelvis så blev implementation av localStorage bara några rader lång och hade antagligen inte behövt vara separat.
+
+### Förbättring 3
+
 Se till att börja i tid med t.ex. reviews så jag inte sitter sista dagen och letar efter en PR reviewa.
 
 ## 4) Hänvisningar (VG)
 
-- Förbättring 1 stöds av PR/commit: <länk/ID>
-- Förbättring 2 stöds av PR/commit: <länk/ID>
+- Förbättring 1 stöds av PR/commit: <https://github.com/s91k/mu25-individ-karlsson-simon/pull/6>
+- Förbättring 2 stöds av PR/commit: <https://github.com/s91k/mu25-individ-karlsson-simon/pull/2>
